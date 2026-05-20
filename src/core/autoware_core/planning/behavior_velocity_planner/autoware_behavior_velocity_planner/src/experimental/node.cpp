@@ -307,6 +307,9 @@ bool BehaviorVelocityPlannerNode::isDataReady(rclcpp::Clock clock)
 void BehaviorVelocityPlannerNode::onTrigger(
   const autoware_internal_planning_msgs::msg::PathWithLaneId::ConstSharedPtr input_path_msg)
 {
+  RCLCPP_INFO(
+    get_logger(), "[E2E_TS] behavior_velocity_planner START sim_ns=%ld wall_ns=%ld",
+    this->now().nanoseconds(), rclcpp::Clock(RCL_SYSTEM_TIME).now().nanoseconds());
   stop_watch_.tic();
   std::unique_lock<std::mutex> lk(mutex_);
 
@@ -353,6 +356,9 @@ void BehaviorVelocityPlannerNode::onTrigger(
   }
 
   publishProcessingTime();
+  RCLCPP_INFO(
+    get_logger(), "[E2E_TS] behavior_velocity_planner END sim_ns=%ld wall_ns=%ld",
+    this->now().nanoseconds(), rclcpp::Clock(RCL_SYSTEM_TIME).now().nanoseconds());
 }
 
 Trajectory BehaviorVelocityPlannerNode::generatePath(
