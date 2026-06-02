@@ -31,6 +31,10 @@
 #include <string>
 #include <vector>
 
+#include <fcntl.h>
+#include <mqueue.h>
+#include <semaphore.h>
+
 namespace autoware::behavior_velocity_planner::experimental
 {
 
